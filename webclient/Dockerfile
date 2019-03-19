@@ -16,6 +16,17 @@
 #RUN $(npm bin)/ng build --prod
 
 
+FROM gradle:jdk8 as builder
+
+COPY --chown=gradle:gradle . /home/gradle/src
+WORKDIR /home/gradle/src
+RUN gradle build
+
+RUN ls -l
+RUN ls -l build
+RUN ls -l build/libs
+
+
 ### STAGE 2: Setup ###
 FROM java:8
 
@@ -24,9 +35,12 @@ WORKDIR /
 ### From ‘builder’ stage copy over the artifacts in dist folder to default nginx public folder
 #COPY --from=builder /ng-app/dist /src/main/resources/static
 
-RUN sh ./gradlew build
+RUN ls -l
+COPY --from=builder /home/gradle/src/build/libs/webclient-0.0.1-SNAPSHOT.jar  ord_order_processing_web.jar
+RUN ls -l
+RUN pwd
 
-ADD build/libs/orderprocessingweb-0.0.1-SNAPSHOT.jar ord_order_processing_web.jar
+#ADD /webclient-0.0.1-SNAPSHOT.jar ord_order_processing_web.jar
 
 RUN sh -c 'touch /ord_order_processing_web.jar'
 
