@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { map, catchError, tap } from 'rxjs/operators';
+import { environment } from '../../environments/environment';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -16,33 +17,9 @@ const httpOptions = {
 
 export class RestOrderService {
 
-  //endpoint = 'http://localhost:8081/';
-  endpoint = 'http://9.204.168.81:';
-  endpointPort : string = '31494';
+  endpoint = environment.orderServiceURL;
   
-  constructor(private http: HttpClient) {
-    this.getEndPointPort();
-    console.log("url url -->" + this.endpointPort)
-   }
-
-  getEndPoint() {
-    let result = this.endpoint + this.endpointPort + "/";
-    console.log("URL Result 2:" + result);
-    return result;
-  }
-
-  getEndPointPort() {
-    return this.http.get('https://raw.githubusercontent.com/GanDigit/ConfigRepo/master/catalog-p.txt').pipe(map(this.extractDataString));
-  }
-
-  private extractDataString(res: Response) {
-    let body = res;
-    let result = body || { };
-    //this.endpointPort = result + "";
-    return result;
-  }
-
-
+  constructor(private http: HttpClient) { }
 
   private extractData(res: Response) {
     let body = res;
@@ -50,34 +27,32 @@ export class RestOrderService {
   }
 
   getOrders(): Observable<any> {
-    console.log("EndPoint 1-->" + this.getEndPoint());
-    return this.http.get(this.getEndPoint() + 'orders').pipe(
+    return this.http.get(this.endpoint + 'orders').pipe(
       map(this.extractData));
   }
   
   getOrder(id): Observable<any> {
-    console.log("EndPoint 2-->" + this.getEndPoint());
-    return this.http.get(this.getEndPoint() + 'orders/' + id).pipe(
+    return this.http.get(this.endpoint + 'orders/' + id).pipe(
       map(this.extractData));
   }
   
   addOrder (order): Observable<any> {
     console.log(order);
-    return this.http.put<any>(this.getEndPoint() + 'orders', JSON.stringify(order), httpOptions).pipe(
+    return this.http.put<any>(this.endpoint + 'orders', JSON.stringify(order), httpOptions).pipe(
       tap((order) => console.log(`added order w/ id=${order.id}`)),
       catchError(this.handleError<any>('addOrder'))
     );
   }
   
   updateOrder (id, order): Observable<any> {
-    return this.http.put(this.getEndPoint() + 'orders', JSON.stringify(order), httpOptions).pipe(
+    return this.http.put(this.endpoint + 'orders', JSON.stringify(order), httpOptions).pipe(
       tap(_ => console.log(`updated order id=${id}`)),
       catchError(this.handleError<any>('updateOrder'))
     );
   }  
   
   deleteOrder (id): Observable<any> {
-    return this.http.delete<any>(this.getEndPoint() + 'orders/' + id, httpOptions).pipe(
+    return this.http.delete<any>(this.endpoint + 'orders/' + id, httpOptions).pipe(
       tap(_ => console.log(`deleted order id=${id}`)),
       catchError(this.handleError<any>('deleteOrder'))
     );

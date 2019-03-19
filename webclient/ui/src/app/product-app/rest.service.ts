@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { map, catchError, tap } from 'rxjs/operators';
+import { environment } from '../../environments/environment';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -15,24 +16,10 @@ const httpOptions = {
 })
 export class RestService {
 
-  //endpoint = 'http://localhost:8082/';
-  endpoint = 'http://9.204.168.81:';
-  endpointPort : string = '32381';
+ 
+  endpoint = environment.catalogServiceURL;
   
-  constructor(private http: HttpClient) {
-    this.getEndPointPort();
-    console.log("url url -->" + this.endpointPort)
-   }
-
-  getEndPoint() {
-    let result = this.endpoint + this.endpointPort + "/";
-    console.log("URL Result 2:" + result);
-    return result;
-  }
-
-  getEndPointPort() {
-    return this.http.get('https://raw.githubusercontent.com/GanDigit/ConfigRepo/master/catalog-p.txt').pipe(map(this.extractDataString));
-  }
+  constructor(private http: HttpClient) { }
 
   private extractDataString(res: Response) {
     let body = res;
@@ -47,32 +34,32 @@ export class RestService {
   }
 
   getProducts(): Observable<any> {
-    return this.http.get(this.getEndPoint() + 'products').pipe(
+    return this.http.get(this.endpoint + 'products').pipe(
       map(this.extractData));
   }
   
   getProduct(id): Observable<any> {
-    return this.http.get(this.getEndPoint() + 'products/' + id).pipe(
+    return this.http.get(this.endpoint + 'products/' + id).pipe(
       map(this.extractData));
   }
   
   addProduct (product): Observable<any> {
     console.log("Add product ---> " + JSON.stringify(product));
-    return this.http.put<any>(this.getEndPoint() + 'products', JSON.stringify(product), httpOptions).pipe(
+    return this.http.put<any>(this.endpoint + 'products', JSON.stringify(product), httpOptions).pipe(
       tap((product) => console.log(`added product w/ id=${product.id}`)),
       catchError(this.handleError<any>('addProduct'))
     );
   }
   
   updateProduct (id, product): Observable<any> {
-    return this.http.put(this.getEndPoint() + 'products', JSON.stringify(product), httpOptions).pipe(
+    return this.http.put(this.endpoint + 'products', JSON.stringify(product), httpOptions).pipe(
       tap(_ => console.log(`updated product id=${id}`)),
       catchError(this.handleError<any>('updateProduct'))
     );
   }
   
   deleteProduct (id): Observable<any> {
-    return this.http.delete<any>(this.getEndPoint() + 'products/' + id, httpOptions).pipe(
+    return this.http.delete<any>(this.endpoint + 'products/' + id, httpOptions).pipe(
       tap(_ => console.log(`deleted product id=${id}`)),
       catchError(this.handleError<any>('deleteProduct'))
     );
