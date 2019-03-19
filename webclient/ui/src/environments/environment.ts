@@ -4,10 +4,12 @@
 
 export const environment = {
   production: false,
-  catalogServiceURL: 'http://9.204.168.81:31494/' ,
-  orderServiceURL: 'http://9.204.168.81:32381/'
+  
+  orderServiceURL: 'http://9.204.168.81:32381/',
+  //catalogServiceURL: 'http://localhost:8082/' ,
+  catalogServiceURL: 'http://9.204.168.81:31494/' 
 
-   //endpoint = 'http://localhost:8082/';
+  //endpoint = 'http://localhost:8082/';
     //endpoint = 'http://localhost:8081/';
 };
 
