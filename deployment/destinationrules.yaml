@@ -1,0 +1,59 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: catalog
+  namespace: <PROJECT>  
+spec:
+  host: catalog
+  trafficPolicy:
+    tls:
+      mode: DISABLE   
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: order
+  namespace: <PROJECT>  
+spec:
+  host: order
+  trafficPolicy:
+    tls:
+      mode: DISABLE    
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: webclient
+  namespace: <PROJECT>  
+spec:
+  host: webclient
+  trafficPolicy:
+    tls:
+      mode: DISABLE    
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: compositeop
+  namespace: <PROJECT>
+spec:
+  host: compositeop
+  trafficPolicy:
+    tls:
+      mode: DISABLE  
+  trafficPolicy:
+    loadBalancer:
+      simple: RANDOM
+  subsets:
+  - name: v1
+    labels:
+      version: v1
+  - name: v2
+    labels:
+      version: v2
+  - name: v3
+    labels:
+      version: v3
+  - name: v4
+    labels:
+      version: v4             
