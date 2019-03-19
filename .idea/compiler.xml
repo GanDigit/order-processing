@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <bytecodeTargetLevel>
+      <module name="com.ord.catalog-service.main" target="1.8" />
+      <module name="com.ord.catalog-service.test" target="1.8" />
+      <module name="com.ord.webclient.main" target="1.8" />
+      <module name="com.ord.webclient.test" target="1.8" />
+      <module name="com.ordproc.catalog-service.main" target="1.8" />
+      <module name="com.ordproc.catalog-service.test" target="1.8" />
+      <module name="com.ordproc.order-service.main" target="1.8" />
+      <module name="com.ordproc.order-service.test" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/OrderProcessingNew.iml" filepath="$PROJECT_DIR$/.idea/OrderProcessingNew.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/com.ord.catalog-service.iml" filepath="$PROJECT_DIR$/.idea/modules/com.ord.catalog-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/com.ord.catalog-service.main.iml" filepath="$PROJECT_DIR$/.idea/modules/com.ord.catalog-service.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/com.ord.catalog-service.test.iml" filepath="$PROJECT_DIR$/.idea/modules/com.ord.catalog-service.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/com.ord.order-service.iml" filepath="$PROJECT_DIR$/.idea/modules/com.ord.order-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/com.ord.webclient.iml" filepath="$PROJECT_DIR$/.idea/modules/com.ord.webclient.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/com.ord.webclient.main.iml" filepath="$PROJECT_DIR$/.idea/modules/com.ord.webclient.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/com.ord.webclient.test.iml" filepath="$PROJECT_DIR$/.idea/modules/com.ord.webclient.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/com.ordproc.order-service.iml" filepath="$PROJECT_DIR$/.idea/modules/com.ordproc.order-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/com.ordproc.order-service.main.iml" filepath="$PROJECT_DIR$/.idea/modules/com.ordproc.order-service.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/com.ordproc.order-service.test.iml" filepath="$PROJECT_DIR$/.idea/modules/com.ordproc.order-service.test.iml" />
+    </modules>
+  </component>
+</project>
